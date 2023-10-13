@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.util.Collection;
 
+import static java.lang.Boolean.TRUE;
 import static java.util.stream.Collectors.toList;
 
 @RequiredArgsConstructor
@@ -66,7 +67,10 @@ public class ServerServiceImplementation implements ServerService {
 
     @Override
     public Boolean delete(Long id) {
-        return null;
+        log.info("Deleting server by ID: {}", id);
+        serverRepo.deleteById(id);
+
+        return TRUE;
     }
 
     private String setServerImageUrl() {
