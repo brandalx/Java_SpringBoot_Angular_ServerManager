@@ -7,11 +7,15 @@ import com.example.server.service.ServerService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.Collection;
+
+import static java.util.stream.Collectors.toList;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -41,7 +45,8 @@ public class ServerServiceImplementation implements ServerService {
 
     @Override
     public Collection<Server> list(int limit) {
-        return null;
+        log.info("Fetching all servers");
+        return serverRepo.findAll(PageRequest.of(0, limit)).toList();
     }
 
     @Override
